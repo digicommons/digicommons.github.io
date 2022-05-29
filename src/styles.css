@@ -10,6 +10,7 @@
   --bg-color-dark: 0, 0%, 15%;
   --fg-color-dark: 40, 82%, 98%;
   --hover-dark: 40, 82%, 88%;
+  --backdrop-dark: var(--bg-color-dark), .85;
   
   --h-font: 'DM Sans', sans-serif;
 }
@@ -216,11 +217,24 @@ aside a svg:hover {
     color: hsl(var(--fg-color-dark));
   }
 
+  aside {
+    background-color: hsl(var(--bg-color-dark));
+  }
+
   aside a svg {
     fill: hsl(var(--fg-color-dark));
   }
 
   aside a svg:hover {
     fill: hsl(var(--hover-dark));
+  }
+
+  .modal {
+    box-shadow: 0 0 2rem rgb(0 0 0 / .5);
+    background-color: hsl(var(--bg-color-dark));
+  }
+
+  .modal::backdrop {
+    background-color: hsla(var(--backdrop-dark));
   }
 }
