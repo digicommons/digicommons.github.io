@@ -1,5 +1,16 @@
-:root {
-  --bg-color: #FEFBF5;
+:root,
+::after,
+::before,
+::backdrop {
+  --bg-color-light: 40, 82%, 98%;
+  --fg-color-light: 0, 0%, 10%;
+  --hover-light: 0, 0%, 25%;
+  --backdrop-light: var(--bg-color-light), .85;
+
+  --bg-color-dark: 0, 0%, 15%;
+  --fg-color-dark: 40, 82%, 98%;
+  --hover-dark: 40, 82%, 88%;
+  
   --h-font: 'DM Sans', sans-serif;
 }
 
@@ -8,7 +19,8 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: var(--bg-color);
+  background-color: hsl(var(--bg-color-light));
+  color: hsl(var(--fg-color-light));
   font-family: var(--h-font);
 }
 
@@ -37,6 +49,7 @@ header {
 main {
   height: 75vh;
   overflow: scroll;
+  padding-bottom: 10%;
 }
 
 main h2,
@@ -45,7 +58,8 @@ main section {
 }
 
 main section img {
-  width: 95%;
+  width: 100%;
+  padding-right: 1rem;
 }
 
 main section h3 {
@@ -64,6 +78,7 @@ aside {
   align-items: center;
   gap: .75rem;
   padding: .1rem .75rem;
+  background-color: hsl(var(--bg-color-light));
 }
 
 aside h2 {
@@ -74,8 +89,47 @@ aside a {
   height: 75%;
 }
 
+aside a svg {
+  fill: hsl(var(--fg-color-light));
+}
+
 aside a svg:hover {
-  opacity: 0.7;
+  fill: hsl(var(--hover-light));
+}
+
+/* Modal-related styles */
+.project {
+  cursor: pointer;
+}
+
+.modal {
+  max-width: 95%;
+  max-height: 70%;
+  border: 0;
+  box-shadow: 0 0 2rem rgb(0 0 0 / .5);
+  background-color: hsl(var(--bg-color-light));
+}
+
+.modal p.closeModal {
+  text-align: right;
+  margin-top: 0;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.modal img {
+  max-width: 100%;
+}
+
+.modal::backdrop {
+  background-color: hsla(var(--backdrop-light));
+}
+
+@supports ((-webkit-backdrop-filter: blur(.15rem)) or (backdrop-filter: blur(.15rem))) {
+  .modal::backdrop {
+  backdrop-filter: blur(.15rem);
+  }
 }
 
 /* Responsive styles */
@@ -109,6 +163,7 @@ aside a svg:hover {
     grid-column: 6 / 11;
     grid-row: 2 / 7;
     scrollbar-width: thin;
+    padding-bottom: 0;
   }
 
   ::-webkit-scrollbar {
@@ -134,5 +189,38 @@ aside a svg:hover {
 
   aside h2 {
     display: block;
+  }
+
+  /* Modal-related styles (Desktop) */
+  /* Hide portrait / show landscape on mobile */
+  .modal {
+    max-width: 75%;
+    min-height: 50%;
+  }
+
+  .modal_container {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .modal img {
+    display: initial;
+    max-width: 65%;
+  }
+}
+
+/* Dark-mode styles */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: hsl(var(--bg-color-dark));
+    color: hsl(var(--fg-color-dark));
+  }
+
+  aside a svg {
+    fill: hsl(var(--fg-color-dark));
+  }
+
+  aside a svg:hover {
+    fill: hsl(var(--hover-dark));
   }
 }
